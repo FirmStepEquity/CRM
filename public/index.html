@@ -79,82 +79,101 @@
         <h1>FirmStep CRM - Property Management</h1>
     </header>
     <main>
-        <div class="card">
-            <h2>Add Seller, Mortgage & Property Details</h2>
-            <form id="propertyForm">
-                <h3>Seller Contact Information</h3>
+      <div class="card">
+        <h2>Seller Contact Information</h2>
+        <form id="propertyForm">
+            <div class="form-group">
+                <label for="sellerName">Seller Name</label>
+                <input type="text" id="sellerName" required>
+            </div>
+            <div class="form-group">
+                <label for="primaryPhone">Primary Phone</label>
+                <input type="text" id="primaryPhone" required>
+            </div>
+            <div class="form-group">
+                <label for="additionalPhone">Additional Phone Numbers</label>
+                <input type="text" id="additionalPhone">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <h3>Property Details</h3>
+            <div class="form-group">
+                <label for="address">Property Address</label>
+                <input type="text" id="address" required>
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" required>
+            </div>
+            <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" id="state" required>
+            </div>
+            <div class="form-group">
+                <label for="zip">ZIP Code</label>
+                <input type="text" id="zip" required>
+            </div>
+            <div class="form-group">
+                <label for="squareFootage">Square Footage</label>
+                <input type="number" id="squareFootage" required>
+            </div>
+            <div class="form-group">
+                <label for="yearBuilt">Year Built</label>
+                <input type="number" id="yearBuilt" required>
+            </div>
+            <h3>Mortgage & Realtor Information</h3>
+            <div class="form-group">
+                <label for="mortgageStatus">Mortgage Status</label>
+                <select id="mortgageStatus">
+                    <option value="paid-off">Paid Off</option>
+                    <option value="ongoing">Ongoing Payments</option>
+                    <option value="behind">Behind on Payments</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="mortgageBalance">Remaining Mortgage Balance</label>
+                <input type="number" id="mortgageBalance">
+            </div>
+            <div class="form-group">
+                <label for="listedWithRealtor">Listed with Realtor?</label>
+                <select id="listedWithRealtor">
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+            </div>
+            <h3>Tenant Information (If Applicable)</h3>
+            <div class="form-group">
+                <label for="occupancy">Occupancy Status</label>
+                <select id="occupancy" onchange="toggleTenantFields()">
+                    <option value="owner">Owner-Occupied</option>
+                    <option value="tenant">Tenant-Occupied</option>
+                    <option value="vacant">Vacant</option>
+                </select>
+            </div>
+            <div id="tenantFields" style="display: none;">
                 <div class="form-group">
-                    <label for="sellerName">Seller Name</label>
-                    <input type="text" id="sellerName" required>
+                    <label for="tenantName">Tenant Name</label>
+                    <input type="text" id="tenantName">
                 </div>
                 <div class="form-group">
-                    <label for="primaryPhone">Primary Phone</label>
-                    <input type="text" id="primaryPhone" required>
+                    <label for="leaseExpiration">Lease Expiration Date</label>
+                    <input type="date" id="leaseExpiration">
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
-                </div>
-                <h3>Mortgage Information</h3>
-                <div class="form-group">
-                    <label for="mortgageStatus">Mortgage Status</label>
-                    <select id="mortgageStatus">
-                        <option value="paid-off">Paid Off</option>
-                        <option value="ongoing">Ongoing Payments</option>
-                        <option value="behind">Behind on Payments</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="mortgageBalance">Remaining Mortgage Balance</label>
-                    <input type="number" id="mortgageBalance">
-                </div>
-                <div class="form-group">
-                    <label for="monthlyPayment">Monthly Mortgage Payment</label>
-                    <input type="number" id="monthlyPayment">
-                </div>
-                <div class="form-group">
-                    <label for="interestRate">Interest Rate (%)</label>
-                    <input type="number" step="0.01" id="interestRate">
-                </div>
-                <h3>Property Details</h3>
-                <div class="form-group">
-                    <label for="address">Property Address</label>
-                    <input type="text" id="address" required>
-                </div>
-                <div class="form-group">
-                    <label for="city">City</label>
-                    <input type="text" id="city" required>
-                </div>
-                <div class="form-group">
-                    <label for="state">State</label>
-                    <input type="text" id="state" required>
-                </div>
-                <div class="form-group">
-                    <label for="zip">ZIP Code</label>
-                    <input type="text" id="zip" required>
-                </div>
-                <h3>Tenant Information (If Applicable)</h3>
-                <div class="form-group">
-                    <label for="occupancy">Occupancy Status</label>
-                    <select id="occupancy" onchange="toggleTenantFields()">
-                        <option value="owner">Owner-Occupied</option>
-                        <option value="tenant">Tenant-Occupied</option>
-                        <option value="vacant">Vacant</option>
-                    </select>
-                </div>
-                <div id="tenantFields" style="display: none;">
-                    <div class="form-group">
-                        <label for="tenantName">Tenant Name</label>
-                        <input type="text" id="tenantName">
-                    </div>
-                    <div class="form-group">
-                        <label for="leaseExpiration">Lease Expiration Date</label>
-                        <input type="date" id="leaseExpiration">
-                    </div>
-                </div>
-                <button type="button" onclick="addProperty()">Add Property</button>
-            </form>
-        </div>
-    </main>
+            </div>
+            <button type="button" onclick="addProperty()">Add Property</button>
+        </form>
+    </div>
+</main>
+<script>
+  function toggleTenantFields() {
+      document.getElementById('tenantFields').style.display = 
+          document.getElementById('occupancy').value === 'tenant' ? 'block' : 'none';
+  }
+  function addProperty() {
+      alert("Property Added! This would be stored in a database.");
+  }
+</script>
 </body>
 </html>
