@@ -131,25 +131,6 @@
                     <label for="zip">ZIP Code</label>
                     <input type="text" id="zip" required>
                 </div>
-                <h3>Tenant Information (If Applicable)</h3>
-                <div class="form-group">
-                    <label for="occupancy">Occupancy Status</label>
-                    <select id="occupancy" onchange="toggleTenantFields()">
-                        <option value="owner">Owner-Occupied</option>
-                        <option value="tenant">Tenant-Occupied</option>
-                        <option value="vacant">Vacant</option>
-                    </select>
-                </div>
-                <div id="tenantFields" style="display: none;">
-                    <div class="form-group">
-                        <label for="tenantName">Tenant Name</label>
-                        <input type="text" id="tenantName">
-                    </div>
-                    <div class="form-group">
-                        <label for="leaseExpiration">Lease Expiration Date</label>
-                        <input type="date" id="leaseExpiration">
-                    </div>
-                </div>
                 <button type="button" onclick="addProperty()">Add Property</button>
             </form>
         </div>
@@ -164,7 +145,6 @@
                         <th>City</th>
                         <th>State</th>
                         <th>ZIP</th>
-                        <th>Occupancy</th>
                         <th>Mortgage</th>
                         <th>Actions</th>
                     </tr>
@@ -176,6 +156,7 @@
         </div>
     </main>
 
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore-compat.js"></script>
     <script>
@@ -197,7 +178,6 @@
                 city: document.getElementById('city').value,
                 state: document.getElementById('state').value,
                 zip: document.getElementById('zip').value,
-                occupancy: document.getElementById('occupancy').value,
                 mortgageStatus: document.getElementById('mortgageStatus').value
             };
             db.collection("properties").add(propertyData);
@@ -205,9 +185,31 @@
 
         function loadProperties() {
             db.collection("properties").onSnapshot(snapshot => {
-                console.log(snapshot.docs);
+                const tableBody = document.querySelector("#propertyTable tbody");
+                tableBody.innerHTML = ""; // Clear before reloading
+
+                snapshot.forEach(doc => {
+                    const property = doc.data();
+                    const row = `
+                        <tr>
+                            <td>${property.sellerName || 'N/A'}</td>
+                            <td>${property.address || 'N/A'}</td>
+                            <td>${property.city || 'N/A'}</td>
+                            <td>${property.state || 'N/A'}</td>
+                            <td>${property.zip || 'N/A'}</td>
+                            <td>${property.mortgageStatus || 'N/A'}</td>
+                            <td><button onclick="deleteProperty('${doc.id}')">Delete</button></td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
             });
         }
+
+        function deleteProperty(id) {
+            db.collection("properties").doc(id).delete();
+        }
+
         document.addEventListener("DOMContentLoaded", loadProperties);
     </script>
 </body>
