@@ -1,99 +1,85 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRM Property Management</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
     <style>
-      body {
-        font-family: 'Roboto', Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f9f9f9;
-        color: #333;
-      }
-      header {
-        background-color: #007bff;
-        color: white;
-        padding: 20px;
-        text-align: center;
-      }
-      main {
-        padding: 20px;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-      h1 {
-        color: #007bff;
-        margin-bottom: 20px;
-      }
-      .card {
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        margin-bottom: 20px;
-      }
-      .card h2 {
-        margin-top: 0;
-      }
-      .table-container {
-        overflow-x: auto;
-      }
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-      }
-      table th, table td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-      }
-      table th {
-        background-color: #007bff;
-        color: white;
-      }
-      button {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-      button:hover {
-        background-color: #0056b3;
-      }
-      footer {
-        text-align: center;
-        padding: 10px;
-        background-color: #333;
-        color: white;
-        position: fixed;
-        width: 100%;
-        bottom: 0;
-      }
-      .form-group {
-        margin-bottom: 15px;
-      }
-      .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-      }
-      .form-group input, .form-group select {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .card h2 {
+            margin-top: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        table th {
+            background-color: #007bff;
+            color: white;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <header>
-      <h1>FirmStep CRM - Property Management</h1>
+        <h1>FirmStep CRM - Property Management</h1>
     </header>
     <main>
       <div class="card">
@@ -116,12 +102,8 @@
             <input type="text" id="zip" required>
           </div>
           <div class="form-group">
-            <label for="bedrooms">Bedrooms</label>
-            <input type="number" id="bedrooms" required>
-          </div>
-          <div class="form-group">
-            <label for="bathrooms">Bathrooms</label>
-            <input type="number" id="bathrooms" required>
+            <label for="type">Type of Property</label>
+            <input type="text" id="type" required>
           </div>
           <div class="form-group">
             <label for="squareFootage">Square Footage</label>
@@ -131,72 +113,95 @@
             <label for="yearBuilt">Year Built</label>
             <input type="number" id="yearBuilt" required>
           </div>
-          <button type="button" onclick="addProperty()">Add Property</button>
-        </form>
-      </div>
-
-      <div class="card">
-        <h2>Property List</h2>
-        <div class="table-container">
-          <table id="propertyTable">
-            <thead>
-              <tr>
-                <th>Address</th>
-                <th>City</th>
-                <th>State</th>
-                <th>ZIP Code</th>
-                <th>Bedrooms</th>
-                <th>Bathrooms</th>
-                <th>Square Footage</th>
-                <th>Year Built</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Properties will be dynamically added here -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </main>
-    <footer>
-      &copy; 2025 FirmStep Equity LLC. All rights reserved.
-    </footer>
-
-    <script>
-      const propertyTable = document.getElementById('propertyTable').querySelector('tbody');
-
-      function addProperty() {
-        const address = document.getElementById('address').value;
-        const city = document.getElementById('city').value;
-        const state = document.getElementById('state').value;
-        const zip = document.getElementById('zip').value;
-        const bedrooms = document.getElementById('bedrooms').value;
-        const bathrooms = document.getElementById('bathrooms').value;
-        const squareFootage = document.getElementById('squareFootage').value;
-        const yearBuilt = document.getElementById('yearBuilt').value;
-
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${address}</td>
-          <td>${city}</td>
-          <td>${state}</td>
-          <td>${zip}</td>
-          <td>${bedrooms}</td>
-          <td>${bathrooms}</td>
-          <td>${squareFootage}</td>
-          <td>${yearBuilt}</td>
-          <td><button onclick="deleteProperty(this)">Delete</button></td>
-        `;
-        propertyTable.appendChild(row);
-
-        document.getElementById('propertyForm').reset();
-      }
-
-      function deleteProperty(button) {
-        const row = button.parentElement.parentElement;
-        propertyTable.removeChild(row);
-      }
-    </script>
-  </body>
-</html>
+          <div class="form-group">
+            <label for="bedrooms">Bedrooms</label>
+            <input type="number" id="bedrooms" required>
+          </div>
+          <div c
+          <div class="card">
+            <h2>Add New Property</h2>
+            <form id="propertyForm">
+              <div class="form-group">
+                <label for="address">Property Address</label>
+                <input type="text" id="address" required>
+              </div>
+              <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" required>
+              </div>
+              <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" id="state" required>
+              </div>
+              <div class="form-group">
+                <label for="zip">ZIP Code</label>
+                <input type="text" id="zip" required>
+              </div>
+              <div class="form-group">
+                <label for="type">Type of Property</label>
+                <input type="text" id="type" required>
+              </div>
+              <div class="form-group">
+                <label for="squareFootage">Square Footage</label>
+                <input type="number" id="squareFootage" required>
+              </div>
+              <div class="form-group">
+                <label for="yearBuilt">Year Built</label>
+                <input type="number" id="yearBuilt" required>
+              </div>
+              <div class="form-group">
+                <label for="bedrooms">Bedrooms</label>
+                <input type="number" id="bedrooms" required>
+              </div>
+              <div class="form-group">
+                <label for="bathrooms">Bathrooms</label>
+                <input type="number" id="bathrooms" required>
+              </div>
+              <div class="form-group">
+                <label for="lotSize">Lot Size (Acres)</label>
+                <input type="number" id="lotSize" required>
+              </div>
+              <button type="button" onclick="addProperty()">Add Property</button>
+            </form>
+          </div>
+          <script>
+            const propertyTable = document.getElementById('propertyTable').querySelector('tbody');
+    
+            function addProperty() {
+                const address = document.getElementById('address').value;
+                const city = document.getElementById('city').value;
+                const state = document.getElementById('state').value;
+                const zip = document.getElementById('zip').value;
+                const type = document.getElementById('type').value;
+                const squareFootage = document.getElementById('squareFootage').value;
+                const yearBuilt = document.getElementById('yearBuilt').value;
+                const bedrooms = document.getElementById('bedrooms').value;
+                const bathrooms = document.getElementById('bathrooms').value;
+                const lotSize = document.getElementById('lotSize').value;
+    
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${address}</td>
+                    <td>${city}</td>
+                    <td>${state}</td>
+                    <td>${zip}</td>
+                    <td>${type}</td>
+                    <td>${squareFootage}</td>
+                    <td>${yearBuilt}</td>
+                    <td>${bedrooms}</td>
+                    <td>${bathrooms}</td>
+                    <td>${lotSize}</td>
+                    <td><button onclick="deleteProperty(this)">Delete</button></td>
+                `;
+                propertyTable.appendChild(row);
+                document.getElementById('propertyForm').reset();
+            }
+    
+            function deleteProperty(button) {
+                const row = button.parentElement.parentElement;
+                propertyTable.removeChild(row);
+            }
+        </script>
+      </body>
+    </html>
+    
